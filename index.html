@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Anotação</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            width: 100%;
+            max-width: 1224px;
+            margin: auto;
+        }
+
+        .clear {
+            clear: both;
+        }
+
+        .header {
+            width: 100%;
+            height: 80px;
+            background-color: #a11e1e;
+        }
+
+        .anotacao {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .container-anotacao {
+            display: block;
+            width: 100%;
+            max-width: 1180px;
+            padding: 5px;
+            margin-top: 20px;
+        }
+
+        .anotacao-single {
+            width: 380px;
+            height: 200px;
+            background-color: yellow;
+            padding: 12px;
+            float: left;
+            margin: 3px;
+        }
+
+
+        .header-anotacao {
+            display: block;
+            position: relative;
+            height: 25px;
+            margin-bottom: 5px;
+        }
+
+        .anotacao-texto {
+            overflow-y: auto;
+            height: calc(100% - 30px);
+            outline: none;
+        }
+   
+      
+        .close {
+            float: right;
+            cursor: pointer;
+        }
+
+        .btn-plus {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: #00ff00;
+            border: 2px solid #00ff00;
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            cursor: pointer;
+        }
+
+        .plus {
+            display: block;
+            margin: auto;
+            font-size: 35px;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <header class="header"></header>
+    <section class="anotacao">
+        <div id="container_anotacao" class="container-anotacao">
+        </div>
+    </section>
+
+    <div id="btn_adicionar_anotacao" class="btn-plus">
+        <span class="plus">+</span>
+    </div>
+
+    <script>
+        var btn_anotacao = document.querySelector("#btn_adicionar_anotacao");
+
+        btn_anotacao.addEventListener("click",()=>{
+            let id =  "nota-" + Math.floor(Math.random() * (1000 - 100 + 1)) + 100;
+            let bloco = document.createElement("div");
+            let head_anotacao = document.createElement("div");
+            let area_anotacao = document.createElement("div");
+            let container = document.querySelector("#container_anotacao");
+            let x = document.createElement('span');
+            
+            x.innerHTML = "X";
+
+            head_anotacao.classList.add("header-anotacao");
+            area_anotacao.classList.add("anotacao-texto");
+            x.classList.add("close");
+
+            bloco.classList.add('anotacao-single');
+            bloco.setAttribute('id',id);
+
+            x.addEventListener('click',()=>{
+                let el = document.querySelector("#"+id);
+                el.parentNode.removeChild(el);
+            });
+            area_anotacao.setAttribute('contenteditable','true');
+            head_anotacao.appendChild(x);
+
+            bloco.appendChild(head_anotacao);
+            bloco.appendChild(area_anotacao);
+
+            container.appendChild(bloco);
+        })
+    </script>
+</body>
+</html>
